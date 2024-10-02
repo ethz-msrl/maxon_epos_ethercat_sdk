@@ -705,7 +705,7 @@ bool Maxon::configParam() {
   bool configSuccess = true;
   uint32_t maxMotorSpeed;
   uint32_t maxProfileVelocity;
-  uint32_t maxGearSpeed;
+  uint32_t maxGearInputSpeed;
   uint32_t nominalCurrent;
   uint32_t maxCurrent;
   uint32_t torqueConstant;
@@ -717,9 +717,9 @@ bool Maxon::configParam() {
   uint32_t velocityPGain;
   uint32_t velocityIGain;
 
-  // Set velocity unit to micro revs per minute
+  // Set velocity unit to rpm
   uint32_t velocity_unit;
-  velocity_unit = 0xFAB44700;
+  velocity_unit = 0x00B44700;
   configSuccess &=
       sdoVerifyWrite(OD_INDEX_SI_UNIT_VELOCITY, 0x00, false, velocity_unit,
                      configuration_.configRunSdoVerifyTimeout);
@@ -731,16 +731,22 @@ bool Maxon::configParam() {
                      configuration_.configRunSdoVerifyTimeout);
 
   maxProfileVelocity = static_cast<uint32_t>(configuration_.maxProfileVelocity *
-                                             60.0 * 1e6 / (2 * M_PI));
+                                             60.0 / (2 * M_PI));
 
   configSuccess &= sdoVerifyWrite(OD_INDEX_MAX_PROFILE_VELOCITY, 0x00, false,
                                   maxProfileVelocity,
                                   configuration_.configRunSdoVerifyTimeout);
 
-  maxGearSpeed =
-      static_cast<uint32_t>(maxMotorSpeed / configuration_.gearRatio);
-  configSuccess &= sdoVerifyWrite(OD_INDEX_GEAR_DATA, 0x03, false, maxGearSpeed,
+  maxGearInputSpeed = static_cast<uint32_t>(configuration_.maxGearInputSpeed);
+
+  configSuccess &= sdoVerifyWrite(OD_INDEX_GEAR_DATA, 0x03, false,
+                                  maxGearInputSpeed,
                                   configuration_.configRunSdoVerifyTimeout);
+
+  // maxGearSpeed =
+  //     static_cast<uint32_t>(maxMotorSpeed / configuration_.gearRatio);
+  // configSuccess &= sdoVerifyWrite(OD_INDEX_GEAR_DATA, 0x03, false, maxGearSpeed,
+  //                                 configuration_.configRunSdoVerifyTimeout);
 
   configSuccess &= sdoVerifyWrite(OD_INDEX_SOFTWARE_POSITION_LIMIT, 0x01, false,
                                   configuration_.minPosition);
