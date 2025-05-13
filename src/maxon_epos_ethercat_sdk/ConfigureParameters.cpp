@@ -705,7 +705,7 @@ bool Maxon::configParam() {
   bool configSuccess = true;
   uint32_t maxMotorSpeed;
   uint32_t maxProfileVelocity;
-  uint32_t maxGearSpeed;
+  uint32_t maxGearInputSpeed;
   uint32_t nominalCurrent;
   uint32_t maxCurrent;
   uint32_t torqueConstant;
@@ -726,6 +726,7 @@ bool Maxon::configParam() {
 
   maxMotorSpeed = static_cast<uint32_t>(configuration_.workVoltage *
                                         configuration_.speedConstant);
+                                        
   configSuccess &=
       sdoVerifyWrite(OD_INDEX_MAX_MOTOR_SPEED, 0x00, false, maxMotorSpeed,
                      configuration_.configRunSdoVerifyTimeout);
