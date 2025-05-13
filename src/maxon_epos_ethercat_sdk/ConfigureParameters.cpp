@@ -717,9 +717,9 @@ bool Maxon::configParam() {
   uint32_t velocityPGain;
   uint32_t velocityIGain;
 
-  // Set velocity unit to micro revs per minute
+  // Set velocity unit to revs per minute
   uint32_t velocity_unit;
-  velocity_unit = 0xFAB44700;
+  velocity_unit = 0x00B44700;
   configSuccess &=
       sdoVerifyWrite(OD_INDEX_SI_UNIT_VELOCITY, 0x00, false, velocity_unit,
                      configuration_.configRunSdoVerifyTimeout);
@@ -731,14 +731,14 @@ bool Maxon::configParam() {
                      configuration_.configRunSdoVerifyTimeout);
 
   maxProfileVelocity = static_cast<uint32_t>(configuration_.maxProfileVelocity *
-                                             60.0 * 1e6 / (2 * M_PI));
+                                             60.0 / (2 * M_PI));
 
   configSuccess &= sdoVerifyWrite(OD_INDEX_MAX_PROFILE_VELOCITY, 0x00, false,
                                   maxProfileVelocity,
                                   configuration_.configRunSdoVerifyTimeout);
 
   maxGearSpeed =
-      static_cast<uint32_t>(maxMotorSpeed / configuration_.gearRatio);
+      static_cast<uint32_t>(configuration_.max_speed);
   configSuccess &= sdoVerifyWrite(OD_INDEX_GEAR_DATA, 0x03, false, maxGearSpeed,
                                   configuration_.configRunSdoVerifyTimeout);
 

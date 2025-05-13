@@ -143,7 +143,7 @@ class Command {
   uint32_t digitalOutputs_{0};
 
   double positionFactorRadToInteger_{1};
-  const double velocityFactorRadPerSecToMicroRPM_{1.0 / (2 * M_PI) * 60 * 1e6};
+  const double velocityFactorRadPerSecToRPM_{1.0 / (2 * M_PI) * 60 * 1.};
   double torqueFactorNmToInteger_{1};
   double currentFactorAToInteger_{1};
 

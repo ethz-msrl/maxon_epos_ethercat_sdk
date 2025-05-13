@@ -215,7 +215,7 @@ void Command::doUnitConversion() {
   if (!useRawCommands_) {
     targetPosition_ =
         static_cast<int32_t>(positionFactorRadToInteger_ * targetPositionUU_);
-    targetVelocity_ = static_cast<int32_t>(velocityFactorRadPerSecToMicroRPM_ *
+    targetVelocity_ = static_cast<int32_t>(velocityFactorRadPerSecToRPM_ *
                                            targetVelocityUU_);
     targetTorque_ =
         static_cast<int16_t>(torqueFactorNmToInteger_ * targetTorqueUU_);
@@ -224,7 +224,7 @@ void Command::doUnitConversion() {
         static_cast<int32_t>(positionFactorRadToInteger_ * positionOffsetUU_);
     torqueOffset_ =
         static_cast<int16_t>(torqueFactorNmToInteger_ * torqueOffsetUU_);
-    velocityOffset_ = static_cast<int32_t>(velocityFactorRadPerSecToMicroRPM_ *
+    velocityOffset_ = static_cast<int32_t>(velocityFactorRadPerSecToRPM_ *
                                            velocityOffsetUU_);
   }
 }

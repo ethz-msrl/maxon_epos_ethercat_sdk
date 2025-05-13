@@ -58,6 +58,7 @@ class Configuration {
   double gearRatio{1};
   double motorConstant{1};
   double workVoltage{48.0};
+  double max_speed{0};
   double speedConstant{0};
   double polePairs{11};
   double nominalCurrentA{0};

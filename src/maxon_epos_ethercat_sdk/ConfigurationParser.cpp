@@ -236,6 +236,12 @@ void ConfigurationParser::parseConfiguration(YAML::Node configNode) {
       configuration_.workVoltage = workVoltage;
     }
 
+    double max_speed;
+    if (getValueFromFile(hardwareNode, "max_gear_input_speed", max_speed)) {
+      configuration_.max_speed = max_speed;
+    }
+
+
     double speedConstant;
     if (getValueFromFile(hardwareNode, "speed_constant", speedConstant)) {
       configuration_.speedConstant = speedConstant;
