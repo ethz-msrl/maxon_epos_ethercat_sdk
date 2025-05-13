@@ -46,14 +46,14 @@ cd catkin_workspace/src
 git clone https://github.com/leggedrobotics/soem_interface.git
 git clone https://github.com/leggedrobotics/ethercat_sdk_master.git
 git clone https://github.com/leggedrobotics/message_logger.git
-git clone https://github.com/leggedrobotics/maxon_epos_ethercat_sdk.git
+git clone https://github.com/ethz-msrl/maxon_epos_ethercat_sdk.git
 cd ../
 catkin build maxon_epos_ethercat_sdk
 ```
 
 ## Example
 
-See [ethercat_device_configurator](https://github.com/leggedrobotics/ethercat_device_configurator) for an minimal working example.
+See [ethercat_device_configurator](https://github.com/ethz-msrl/ethercat_device_configurator) for an minimal working example.
 
 ## Usage
 
